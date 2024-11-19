@@ -14,6 +14,8 @@ pip install pyvdirs
 
 It is good practice to always create a Python virtual environment before installing new packages.
 
+## Additional Information
+
 ### Main Author Contact
 
 Valeria Pais - @vrpais - valeriarpais@gmail.com
