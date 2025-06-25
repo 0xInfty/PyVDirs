@@ -2,6 +2,9 @@ import json
 import os
 from socket import gethostname
 
+print("Host name at dirs", gethostname())
+print("Current working dir at dirs", os.getcwd())
+
 """
 Usage
 -----
@@ -45,18 +48,20 @@ def check_directories_file(system_home=SYSTEM_HOME):
     """Check if directories' file has been correctly created; fixes it if not"""
 
     filepath = get_systems_filepath(system_home)
+    print("JSON filepath in dirs", filepath)
 
     try:
         with open(filepath, "r") as file:
             systems_dict = json.load(file)
     except:
         systems_dict = {}
+    print("Loaded JSON in dirs", systems_dict)
 
     try: systems_dict["else"]
     except: systems_dict.update({"else": UNKNOWN_SYSTEM})
 
-    with open(filepath, "w") as file:
-        json.dump(systems_dict, file)
+    # with open(filepath, "w") as file:
+    #     json.dump(systems_dict, file)
 
     return systems_dict
 
@@ -75,7 +80,7 @@ def configure_system(interactive=False):
             system_home = input("Copy and paste your code repository directory;\n"+
                                 "e.g. /home/user/code/MindEye\n> ")
             
-    else: system_home = UNKNOWN_SYSTEM["system_home"]
+    else: system_home = SYSTEM_HOME
 
     if not os.path.isdir(system_home): raise OSError("System directory not found")
 
@@ -144,10 +149,11 @@ def configure_system(interactive=False):
     else:
         systems_dict.update({id: system_dict})
 
-    filepath = get_systems_filepath(system_home)
-    with open(filepath, "w") as file:
-        json.dump(systems_dict, file)
-    
+    if interactive:
+        filepath = get_systems_filepath(system_home)
+        with open(filepath, "w") as file:
+            json.dump(systems_dict, file)
+
     return system_dict
 
 #%% 

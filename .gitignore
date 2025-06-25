@@ -1,6 +1,9 @@
 # A JSON file will be created with the local directories: make sure to add it to .gitignore
 dirs.json
 
+# Visual Code Studio
+/.vscode
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
