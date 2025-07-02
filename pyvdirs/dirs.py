@@ -2,9 +2,6 @@ import json
 import os
 from socket import gethostname
 
-print("Host name at dirs", gethostname())
-print("Current working dir at dirs", os.getcwd())
-
 """
 Usage
 -----
@@ -48,14 +45,12 @@ def check_directories_file(system_home=SYSTEM_HOME):
     """Check if directories' file has been correctly created; fixes it if not"""
 
     filepath = get_systems_filepath(system_home)
-    print("JSON filepath in dirs", filepath)
 
     try:
         with open(filepath, "r") as file:
             systems_dict = json.load(file)
     except:
         systems_dict = {}
-    print("Loaded JSON in dirs", systems_dict)
 
     try: systems_dict["else"]
     except: systems_dict.update({"else": UNKNOWN_SYSTEM})
